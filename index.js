@@ -10,6 +10,14 @@ app.get('/',function(req,res){
 });
 
 
+
+
+// NOT AVAILABLE ROUTES
+app.get('*',function(req,res){
+  res.render("./src/errorPage.ejs");
+});
+
+
 app.listen(8080,function(){
   console.log("Server started on port 8080");
 });

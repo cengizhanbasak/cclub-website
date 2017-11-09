@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/style.css">
-    <title>METU CCLUB</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#"><img src="img/logosmall.png" class="inline-block img-responsive" alt="Cclub"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">CClub</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </nav>
+<% include ../partials/header %>
     <div class="bg">
       <div class="container">
         <div class="midText">
@@ -35,13 +7,19 @@
       </div>
     </div>
   </div>
-  <footer class="footer">
-    <div class="container">
-      ODTÜ Bilgisayar Topluluğu 2017
+
+    <div class="container" >
+      <div class="jumbotron" id="info">
+        <p class="h1">Biz Kimiz?</p>
+        <p class="lead">ODTÜ Bilgisayar Topluluğu 1989 yılında kurulmuş, ODTÜ Kültür İşleri Müdürlüğü denetiminde varlığını sürdüren bir öğrenci topluluğudur. Akademik danışmanı, ODTÜ Bilgisayar Mühendisliği Bölümü öğretim üyelerinden Prof. Dr. Göktürk Üçoluk'tur. Topluluğumuz yaptığı çalışmalar, geliştirdiği ve geliştirmekte olduğu projeler ve düzenlediği etkinliklerle sosyal, çağdaş ve alanında öncü bir topluluk olup çalışmaları ülke genelinde örnek gösterilmektedir.</p>
+        <hr class="my-4">
+        <p class="h1">Amaçlarımız</p>
+        <ul>
+          <li>Akademik düzeyde eğitim alan öğrencilerin bilgisayar bilimleri konusundaki sorularına yanıt vermek</li>
+          <li>Öğrencileri bilgisayar bilimine ve bilişime teşvik etmek</li>
+          <li>Bilgisayar mantığını, teknolojisi, işlevi ve diğer bütün yönleriyle tanıtmak ve yaymak</li>
+          <li>Bilgisayarla ilgilenen ve ilgilenmek isteyenleri aynı çatı altında toplamak, profesyonel bakış açısını ve öğrenci bakış açısını, tecrübe ve isteği bir araya getirmek</li>
+        </ul>
+      </div>
     </div>
-  </footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  </body>
-</html>
+<% include ../partials/footer %>

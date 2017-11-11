@@ -11,6 +11,16 @@ ul li{
   height: auto;
 }
 
+.leftimage {
+  width: 48%;
+  height: auto;
+}
+
+.rightimage {
+  width: 48%;
+  height: auto;
+}
+
 .bg {
     /* The image used */
     background-image: url("../img/bg1.jpg");
@@ -38,7 +48,7 @@ ul li{
 
 }
 
-#info{
+.info{
   margin-top: 10px;
   background: #ccc;
 }

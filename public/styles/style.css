@@ -53,6 +53,24 @@ ul li{
   background: #ccc;
 }
 
+.card{
+  margin: 5px;
+  background: rgba(178,178,178,0.8);
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+}
+
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.card-text {
+  font-size: 2em;
+}
+
 #Header {
   color: #fff;
   font-size: 3em;

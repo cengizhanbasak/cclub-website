@@ -20,6 +20,15 @@ ul li{
 .carousel-caption{
   padding-bottom: 50px;
 }
+.leftimage {
+  width: 48%;
+  height: auto;
+}
+
+.rightimage {
+  width: 48%;
+  height: auto;
+}
 
 .bg {
     /* The image used */
@@ -48,9 +57,28 @@ ul li{
 
 }
 
-#info{
+.info{
   margin-top: 10px;
   background: #ccc;
+}
+
+
+.card{
+  margin-top: 5px;
+  background: rgba(178,178,178,0.8);
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.card-text {
+  font-size: 2em;
 }
 
 .Header {

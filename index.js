@@ -9,7 +9,9 @@ app.get('/',function(req,res){
   res.render('./src/index.ejs');
 });
 
-
+app.get('/announce',function(req,res){
+  res.render('./src/announce.ejs');
+});
 
 
 // NOT AVAILABLE ROUTES

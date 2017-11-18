@@ -1,7 +1,7 @@
 body,html {
     height: 100%;
     margin: 0;
-    background: #343a40;
+    background: #222;
 }
 ul li{
   font-size: 1.2em;
@@ -11,18 +11,39 @@ ul li{
   width: 60px;
   height: auto;
 }
+@media only screen and (min-width: 1200px) {
+  .carousel-item{
+    width:100%;
+    height: 60vh;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .carousel-item{
+    height: 80vh;
+  }
+  .w-100{
+    height: 100vh;
+    object-fit: cover;
+  }
+}
 
-.carousel-item{
-  width:100%;
-  height: 600px;
+.media{
+  margin: 10px;
 }
 
 .carousel-caption{
   padding-bottom: 50px;
 }
+
 .leftimage {
   width: 48%;
   height: auto;
+}
+
+.carousel-inner .carousel-item img {
+    position:relative;
+    top:50%;
+    transform: translateY(-50%);
 }
 
 .rightimage {
@@ -41,10 +62,13 @@ ul li{
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .inpar {
     margin-bottom: 20px;
 }
-
+#links li {
+  list-style-type: none;
+}
 .midText{
     padding-top: 15%;
     text-align: center;
@@ -52,11 +76,13 @@ ul li{
 }
 
 .footer {
-  margin-top: 1px;
   color: #aaa;
   height: auto;
   padding-top: 5px;
   text-align: center;
+  background: #343a40;
+  width: 100%!important;
+  bottom: 0;
 
 }
 
@@ -71,13 +97,25 @@ ul li{
   background: rgba(178,178,178,0.8);
   align-items: center;
   text-align: center;
-  padding: 20px;
+  padding-bottom: 30px;
+}
+
+.mr-2{
+  display: inline-block;
+  float: left;
+  width: 25%;
+}
+@media only screen and (max-width: 600px) {
+  .mr-2{
+    width: 50%;
+  }
 }
 
 .card-img-top {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  margin-top: 20px;
 }
 
 .card-text {
@@ -93,6 +131,18 @@ ul li{
   font-size: 2em;
   text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
   color: #fff;
+}
+@media only screen and (max-width: 600px) {
+  .Header {
+    color: #fff;
+    font-size: 2em;
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  }
+  .subHeader{
+    font-size: 1em;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+    color: #fff;
+  }
 }
 #errorBg{
   /* The image used */

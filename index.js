@@ -13,6 +13,17 @@ app.get('/announce',function(req,res){
   res.render('./src/announce.ejs');
 });
 
+app.get('/about',function(req,res){
+  res.render('./src/about.ejs');
+});
+
+app.get('/contact',function(req,res){
+  res.render('./src/contact.ejs');
+});
+
+app.get('/events',function(req,res){
+  res.render('./src/eventsPage.ejs');
+});
 
 // NOT AVAILABLE ROUTES
 app.get('*',function(req,res){

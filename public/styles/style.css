@@ -3,6 +3,11 @@ body,html {
     margin: 0;
     background: #222;
 }
+i{
+  right: 5px;
+  position: relative;
+  vertical-align: middle;
+}
 ul li{
   font-size: 1.2em;
 }

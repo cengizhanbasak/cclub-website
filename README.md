@@ -4,7 +4,7 @@ An express.js server to run cclub's website.
 
 ## watch
 
-[cclub.metu.edu.tr](cclub.metu.edu.tr)
+[cclub.metu.edu.tr](http://cclub.metu.edu.tr)
 
 ## run
 

@@ -25,6 +25,10 @@ app.get('/events',function(req,res){
   res.render('./src/eventsPage.ejs',{active:'events'});
 });
 
+app.get('/gallery',function(req,res){
+  res.render('./src/gallery.ejs',{active:'gallery'});
+});
+
 // NOT AVAILABLE ROUTES
 app.get('*',function(req,res){
   res.render("./src/errorPage.ejs",{active:''});

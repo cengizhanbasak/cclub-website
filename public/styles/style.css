@@ -17,6 +17,7 @@ ul li{
   height: auto;
 }
 
+
 @media only screen and (min-width: 1200px) {
   .carousel-item{
     width:100%;
@@ -125,6 +126,18 @@ ul li{
 @media only screen and (max-width: 600px) {
   .mr-2{
     width: 50%;
+  }
+}
+
+.galerimg{
+  width: 47%;
+  margin: 1%;
+}
+@media only screen and (max-width: 600px) {
+  .galerimg
+  {
+    width: 100%;
+    margin-top: 5px;
   }
 }
 

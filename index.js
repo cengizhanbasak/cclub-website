@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 var active;
-app.use( express.static( "public" ) );
+var oneYear = 31557600000;
+app.use( express.static( "public" , { maxAge: oneYear }) );
+
 
 // GET REQUESTS
 

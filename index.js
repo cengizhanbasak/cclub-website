@@ -1,13 +1,22 @@
 var express = require('express');
 var app = express();
+app.use( express.static(__dirname + '/public' , { maxage: '1d' }) );
 var active;
-var oneYear = 31557600000;
-app.use( express.static( "public" , { maxAge: oneYear }) );
 
 
 // GET REQUESTS
 
+app.get('/*', function (req, res, next) {
+
+  if (req.url.indexOf("/images/") === 0 || req.url.indexOf("/stylesheets/") === 0) {
+    res.setHeader("Cache-Control", "public, max-age=2592000");
+    res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
+  }
+  next();
+});
+
 app.get('/',function(req,res){
+  res.setHeader("Cache-Control", "public, max-age=2592000");
   res.render('./src/index.ejs',{active:''});
 });
 

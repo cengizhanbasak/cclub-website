@@ -40,6 +40,11 @@ app.get('/gallery',function(req,res){
   res.render('./src/gallery.ejs',{active:'gallery'});
 });
 
+// NEW TAB SEEMS BETTER
+// app.get('/tuzuk',function(req,res){
+//   res.render('./src/tuzukPage.ejs',{active:'tuzuk'})
+// });
+
 // NOT AVAILABLE ROUTES
 app.get('*',function(req,res){
   res.render("./src/errorPage.ejs",{active:''});

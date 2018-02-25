@@ -129,6 +129,18 @@ ul li{
   }
 }
 
+.mr-3{
+  display: inline-block;
+  float: left;
+  width: 50%;
+}
+@media only screen and (max-width: 600px) {
+  .mr-3{
+    width: 100%;
+    margin-bottom: 12px;
+  }
+}
+
 .galerimg{
   width: 47%;
   margin: 1%;

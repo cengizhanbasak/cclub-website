@@ -40,6 +40,14 @@ app.get('/gallery',function(req,res){
   res.render('./src/gallery.ejs',{active:'gallery'});
 });
 
+app.get('/yarisma',function(req,res){
+  res.status(301).redirect('https://yarisma.cclub.metu.edu.tr');
+});
+
+app.get('/bergi',function(req,res){
+  res.status(301).redirect('https://e-bergi.com');
+});
+
 // NEW TAB SEEMS BETTER
 // app.get('/tuzuk',function(req,res){
 //   res.render('./src/tuzukPage.ejs',{active:'tuzuk'})

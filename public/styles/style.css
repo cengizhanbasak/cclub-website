@@ -118,6 +118,10 @@ ul li{
   padding-bottom: 30px;
 }
 
+.mt-0 {
+  margin-bottom: 16px;
+}
+
 .mr-2{
   display: inline-block;
   float: left;

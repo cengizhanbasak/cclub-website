@@ -40,6 +40,10 @@ app.get('/gallery',function(req,res){
   res.render('./src/gallery.ejs',{active:'gallery'});
 });
 
+app.get('/bilisimgunu',function(req,res){
+  res.render('./src/bilisim.ejs',{active:'bilisim'});
+});
+
 app.get('/yarisma',function(req,res){
   res.status(301).redirect('https://yarisma.cclub.metu.edu.tr');
 });

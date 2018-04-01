@@ -118,6 +118,10 @@ ul li{
   padding-bottom: 30px;
 }
 
+p.lead {
+    font-size: 1.2rem;
+}
+
 .mt-0 {
   margin-bottom: 16px;
 }

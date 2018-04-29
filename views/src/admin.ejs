@@ -1,0 +1,11 @@
+<h2>Menu</h2>
+<ul>
+  <li><a href="/admin/logout">Logout</a></li>
+  <li><a href="/members/new">Yeni Aktif Üye</a></li>
+</ul>
+<h2>Uyeler</h1>
+<ul>
+  <% members.forEach(function(member){ %>
+    <li> <%= member.name %> - Since <%= member.timestamp %> </li>
+  <% }) %>
+</ul>

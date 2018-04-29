@@ -16,7 +16,10 @@
   "author": "Cengizhan Basak",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "pg": "^7.4.1",
+    "pg-then": "^1.2.1"
   }
 }

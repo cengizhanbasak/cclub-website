@@ -1,6 +1,8 @@
 var express = require('express');
+var session = require('express-session');
 var app = express();
 var bodyParser = require('body-parser');
+
 
 const { Client } = require('pg')
 const client = new Client({
@@ -12,14 +14,14 @@ const client = new Client({
 })
 client.connect()
 
+
+app.use(session({resave: true, saveUninitialized: true, secret: 'cblurbsecret', cookie: { maxAge: 60000 }}));
 app.use( express.static(__dirname + '/public' , { maxage: '1d' }) );
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
-var active;
 
-var superUser = false;
 
 // GET REQUESTS
 
@@ -33,6 +35,7 @@ app.get('/*', function (req, res, next) {
 });
 
 app.get('/',function(req,res){
+  req.session.name = "standard"
   res.setHeader("Cache-Control", "public, max-age=2592000");
   res.render('./src/index.ejs',{active:''});
 });
@@ -40,7 +43,7 @@ app.get('/',function(req,res){
 // ADMIN STUFF
 
 app.get('/admin',function(req,res){
-  if(superUser == true){
+  if(req.session.name == "superuser"){
     client.query("SELECT * FROM active_members",(err,result) => {
       res.render('./src/admin.ejs',{members: result.rows})
     })
@@ -62,7 +65,7 @@ app.post('/admin/login',function(req,res){
     if( result.rows[0].exists == true ){
       client.query("SELECT * FROM superusers WHERE username='"+ username +"'", (err, res1) => {
         if( password == res1.rows[0].password ){
-          superUser = true;
+          req.session.name = "superuser"
           res.redirect('/admin')
         }else {
           res.redirect('/')
@@ -75,14 +78,14 @@ app.post('/admin/login',function(req,res){
 });
 
 app.get('/admin/logout',function(req,res){
-  superUser = false;
+  req.session.name = "standard"
   res.redirect('/')
 });
 
 // NEW MEMBER
 
 app.get('/members/new',function(req,res){
-  if(superUser == true){
+  if(req.session.name == "standard"){
     res.render('./src/members/new.ejs')
   }else {
     res.redirect('/')
@@ -90,7 +93,7 @@ app.get('/members/new',function(req,res){
 })
 
 app.post('/members/new',function(req,res){
-  if(superUser == true){
+  if(req.session.name == "standard"){
     var name = req.body.name
     if(name != '')
     client.query("INSERT INTO active_members ( name ) VALUES ( '" + name + "' )",(err,result) => {

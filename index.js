@@ -4,16 +4,12 @@ var app = express();
 var bodyParser = require('body-parser');
 
 
-const { Client } = require('pg')
-const client = new Client({
-  user: 'cclub',
-  host: '/var/run/postgresql',
-  database: 'cclub',
-  password: '',
-  port: 5432,
-})
-client.connect()
-
+var sqlite3 = require('sqlite3').verbose();
+db = new sqlite3.Database('cclub.sqlite3', createTable);
+function createTable() {
+    db.run("CREATE TABLE IF NOT EXISTS  superUsers ( username varchar(25) NOT NULL, password TEXT NOT NULL);");
+    db.run("CREATE TABLE IF NOT EXISTS active_members ( id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(30) NOT NULL, timestamp timestamp default current_timestamp);");
+}
 
 app.use(session({resave: true, saveUninitialized: true, secret: 'cblurbsecret', cookie: { maxAge: 60000 }}));
 app.use( express.static(__dirname + '/public' , { maxage: '1d' }) );
@@ -44,8 +40,9 @@ app.get('/',function(req,res){
 
 app.get('/admin',function(req,res){
   if(req.session.name == "superuser"){
-    client.query("SELECT * FROM active_members",(err,result) => {
-      res.render('./src/admin.ejs',{members: result.rows})
+    db.all("SELECT * FROM active_members",function(err,result) {
+      console.log(result)
+      res.render('./src/admin.ejs',{members: result})
     })
   }else {
     res.redirect('/')
@@ -60,11 +57,13 @@ app.post('/admin/login',function(req,res){
   var username = req.body.username;
   var password = req.body.password;
 
-  client.query("SELECT EXISTS(SELECT * FROM superusers WHERE username='"+ username +"')",(err,result) => {
-    console.log(result.rows[0].exists)
-    if( result.rows[0].exists == true ){
-      client.query("SELECT * FROM superusers WHERE username='"+ username +"'", (err, res1) => {
-        if( password == res1.rows[0].password ){
+  db.get("SELECT EXISTS(SELECT * FROM superusers WHERE username='"+ username +"')",function(err,result){
+    console.log(result);
+    console.log(result[Object.keys(result)[0]])
+    if( result[Object.keys(result)[0]] == 1 ){
+      db.get("SELECT * FROM superusers WHERE username='"+ username +"'", (err, res1) => {
+        console.log(res1)
+        if( password == res1.password ){
           req.session.name = "superuser"
           res.redirect('/admin')
         }else {
@@ -85,7 +84,7 @@ app.get('/admin/logout',function(req,res){
 // NEW MEMBER
 
 app.get('/members/new',function(req,res){
-  if(req.session.name == "standard"){
+  if(req.session.name == "superuser"){
     res.render('./src/members/new.ejs')
   }else {
     res.redirect('/')
@@ -93,10 +92,10 @@ app.get('/members/new',function(req,res){
 })
 
 app.post('/members/new',function(req,res){
-  if(req.session.name == "standard"){
+  if(req.session.name == "superuser"){
     var name = req.body.name
     if(name != '')
-    client.query("INSERT INTO active_members ( name ) VALUES ( '" + name + "' )",(err,result) => {
+    db.run("INSERT INTO active_members ( name ) VALUES ( '" + name + "' )",(err,result) => {
       res.redirect('/admin')
     })
   }else {
@@ -152,3 +151,7 @@ app.get('*',function(req,res){
 app.listen(3002,function(){
   console.log("Server started on port 3002");
 });
+
+process.on('exit', () => {
+  db.close();
+})

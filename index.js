@@ -2,7 +2,7 @@ var express = require('express');
 var session = require('express-session');
 var app = express();
 var bodyParser = require('body-parser');
-
+var crypto = require('crypto');
 
 var sqlite3 = require('sqlite3').verbose();
 db = new sqlite3.Database('cclub.sqlite3', createTable);
@@ -41,7 +41,6 @@ app.get('/',function(req,res){
 app.get('/admin',function(req,res){
   if(req.session.name == "superuser"){
     db.all("SELECT * FROM active_members",function(err,result) {
-      console.log(result)
       res.render('./src/admin.ejs',{members: result})
     })
   }else {
@@ -55,24 +54,25 @@ app.get('/admin/login',function(req,res){
 
 app.post('/admin/login',function(req,res){
   var username = req.body.username;
-  var password = req.body.password;
-
-  db.get("SELECT EXISTS(SELECT * FROM superusers WHERE username='"+ username +"')",function(err,result){
-    console.log(result);
-    console.log(result[Object.keys(result)[0]])
-    if( result[Object.keys(result)[0]] == 1 ){
-      db.get("SELECT * FROM superusers WHERE username='"+ username +"'", (err, res1) => {
-        console.log(res1)
-        if( password == res1.password ){
-          req.session.name = "superuser"
-          res.redirect('/admin')
-        }else {
-          res.redirect('/')
-        }
-      })
-    }else {
-      res.redirect('/')
-    }
+  var hashed = crypto.createHmac('sha256',req.body.password).digest('hex');
+  console.log(hashed);
+  db.serialize(function(){
+    var stmt = db.prepare("SELECT EXISTS(SELECT * FROM superusers WHERE username=? )")
+    stmt.get( username,function(err,result){
+      if( result[Object.keys(result)[0]] == 1 ){
+        db.get("SELECT * FROM superusers WHERE username=?", username, (err, res1) => {
+          if( hashed == res1.password ){
+            req.session.name = "superuser"
+            res.redirect('/admin')
+          }else {
+            res.redirect('/')
+          }
+        })
+      }else {
+        res.redirect('/')
+      }
+    })
+    stmt.finalize();
   })
 });
 
@@ -95,7 +95,7 @@ app.post('/members/new',function(req,res){
   if(req.session.name == "superuser"){
     var name = req.body.name
     if(name != '')
-    db.run("INSERT INTO active_members ( name ) VALUES ( '" + name + "' )",(err,result) => {
+    db.run("INSERT INTO active_members ( name ) VALUES ( ? )", name,(err,result) => {
       res.redirect('/admin')
     })
   }else {

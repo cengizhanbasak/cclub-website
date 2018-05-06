@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",

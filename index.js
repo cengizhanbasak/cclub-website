@@ -140,9 +140,9 @@ app.get('/bergi',function(req,res){
 });
 
 // NEW TAB SEEMS BETTER
-// app.get('/tuzuk',function(req,res){
-//   res.render('./src/tuzukPage.ejs',{active:'tuzuk'})
-// });
+app.get('/tuzuk',function(req,res){
+  res.sendFile(__dirname + '/public/docs/odtu_bilgisayar_toplulugu_tuzugu.pdf')
+});
 
 // NOT AVAILABLE ROUTES
 app.get('*',function(req,res){

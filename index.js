@@ -3,11 +3,13 @@ var session = require('express-session');
 var app = express();
 var bodyParser = require('body-parser');
 var crypto = require('crypto');
-crypto.DEFAULT_ENCODING = 'hex';
 var sqlite3 = require('sqlite3').verbose();
+
+crypto.DEFAULT_ENCODING = 'hex';
 db = new sqlite3.Database('cclub.sqlite3', createTable);
+
 function createTable() {
-    db.run("CREATE TABLE IF NOT EXISTS  superUsers ( username varchar(25) NOT NULL, password TEXT NOT NULL);");
+    db.run("CREATE TABLE IF NOT EXISTS  superusers ( username varchar(25) NOT NULL UNIQUE, password TEXT NOT NULL);");
     db.run("CREATE TABLE IF NOT EXISTS active_members ( id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(30) NOT NULL, timestamp timestamp default current_timestamp);");
 }
 
@@ -18,11 +20,9 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-
 // GET REQUESTS
 
 app.get('/*', function (req, res, next) {
-
   if (req.url.indexOf("/styles/") === 0 || req.url.indexOf("/img/") === 0) {
     res.setHeader("Cache-Control", "public, max-age=2592000");
     res.setHeader("Expires", new Date(Date.now() + 2592000000).toUTCString());
@@ -55,7 +55,6 @@ app.get('/admin/login',function(req,res){
 app.post('/admin/login',function(req,res){
   var username = req.body.username;
   crypto.pbkdf2(req.body.password, 'cblurb', 100000, 64, 'sha512',(err,hashed) => {
-    console.log(hashed);
     db.serialize(function(){
       var stmt = db.prepare("SELECT EXISTS(SELECT * FROM superusers WHERE username=? )")
       stmt.get( username,function(err,result){
@@ -75,7 +74,6 @@ app.post('/admin/login',function(req,res){
       stmt.finalize();
     })
   });
-
 });
 
 app.get('/admin/logout',function(req,res){

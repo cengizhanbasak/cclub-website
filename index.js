@@ -116,6 +116,10 @@ app.get('/announce', function(req, res) {
   res.render('./src/announce.ejs', {active: 'announce'});
 });
 
+app.get('/faydali', function(req, res) {
+  res.render('./src/faydali.ejs', {active: 'faydali'});
+});
+
 app.get('/about', function(req, res) {
   res.render('./src/about.ejs', {active: 'about'});
 });

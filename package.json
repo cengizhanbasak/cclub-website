@@ -19,7 +19,7 @@
     "body-parser": "^1.18.2",
     "crypto": "^1.0.1",
     "ejs": "^2.5.7",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "pg": "^7.4.1",
     "pg-then": "^1.2.1",
